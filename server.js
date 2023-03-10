@@ -46,10 +46,11 @@ export default {
        * Create a Remix request handler and pass
        * Hydrogen's Storefront client to the loader context.
        */
-      const handleRequest = createRequestHandler({
-        build: remixBuild,
-        mode: process.env.NODE_ENV,
-        getLoadContext: () => ({session, storefront, env}),
+      const {
+        createRequestHandler,
+      } = require("@remix-run/vercel");
+      module.exports = createRequestHandler({
+        build: require("./build"),
       });
 
       const response = await handleRequest(request);
